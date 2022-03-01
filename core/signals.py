@@ -1,6 +1,7 @@
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete, pre_save, post_save
 from .models import Products, ProductsImages, Taxes, RateTypes, User
+from rest_framework.authtoken.models import Token
 
 @receiver(pre_delete, sender=Products)
 def pre_delete_products(instance, **kwargs):
@@ -34,9 +35,7 @@ def post_save_products(instance, **kwargs):
     return instance
 
 
-# @receiver(pre_save, sender=User)
-# def pre_save_user(instance, **kwargs):
-#     # if instance.status.filter(slug='admin').exists():
-#     #     instance.is_superuser = True
-
-#     return instance  
+@receiver(post_save, sender=User)
+def post_save_user(instance, created, **kwargs):
+    if created:
+        Token.objects.create(user=instance)  
