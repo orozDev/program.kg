@@ -88,7 +88,7 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampMixin):
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email', 'name']
+    REQUIRED_FIELDS = ['email', 'name', 'phone_number', 'status']
 
     def __str__(self):
         return f'{self.username} - {self.name}'
