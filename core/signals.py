@@ -38,4 +38,11 @@ def post_save_products(instance, **kwargs):
 @receiver(post_save, sender=User)
 def post_save_user(instance, created, **kwargs):
     if created:
-        Token.objects.create(user=instance)  
+        Token.objects.create(user=instance)
+        if instance.status.filter(slug='admin').exists():
+            instance.is_superuser = True
+            instance.save()
+
+# @receiver(pre_save, sender=User)
+# def pre_save_user(instance, **kwargs):
+#     instance 

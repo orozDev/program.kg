@@ -1,8 +1,9 @@
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView, RetrieveDestroyAPIView, CreateAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView, GenericAPIView, RetrieveDestroyAPIView, CreateAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import AllowAny, BasePermission
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
+from rest_framework.authtoken.models import Token
 from rest_framework import status as Status
 from core.api.serializers import *
 from core.models import *
@@ -21,6 +22,39 @@ class CustomIsAdminUser(BasePermission):
         if request.user.is_authenticated and request.user.is_superuser:
             return True     
         return False
+
+class RegisterAPI(GenericAPIView):
+    serializer_class = RegisterSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        status = UsersStatus.objects.get(slug='admin')
+        if status.id in request.data['status']:
+            serializer.is_superuser = True
+            
+        user = serializer.save()
+        return Response({
+            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            "token": ''
+        })
+
+# class UserApiView(ListCreateAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#     permission_classes = (AllowAny,)
+
+#     def post(self, request, **kwargs):
+#         instance = UserSerializer(data=request.data)
+        
+#         if instance.is_valid():
+#             status_list = request.data['status']
+#             status_admin = UsersStatus.objects.get(slug='admin')
+#             if status_admin.id in status_list:
+#                 instance.is_superuser = True
+
+#             instance.save()
+#         return Response({'detail': 'Успех'})
 
 
 #_______________________VIEW____________________________

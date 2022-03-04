@@ -3,6 +3,22 @@ from pyexpat import model
 from rest_framework import serializers
 from core.models import *
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'name', 'phone_number', 'status',)
+
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'name', 'phone_number', 'status', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
+
+        return user
+
 class ProductsSerializer(serializers.ModelSerializer):
 
     category_id = serializers.SlugRelatedField(

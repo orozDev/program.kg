@@ -49,7 +49,7 @@ class PostsAdminForm(forms.ModelForm):
     content = forms.CharField(label='Контент', widget=CKEditorUploadingWidget())
     
     class Meta:
-        model = Pages
+        model = Posts
         fields = '__all__'
 
 

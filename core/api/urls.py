@@ -8,6 +8,7 @@ urlpatterns = [
     path('swagger/', get_swagger_view(title='Pastebin API')),
     path('auth/', include('djoser.urls')),
     path('auth-token/', include('djoser.urls.authtoken')),
+    path('auth-token/registration/', RegisterAPI.as_view()),
     
     path('products/', ProductsApiView.as_view()),
     path('products/<int:pk>/', ProductsDetailApiView.as_view()),
