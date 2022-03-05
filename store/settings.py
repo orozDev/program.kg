@@ -322,14 +322,14 @@ JAZZMIN_SETTINGS = {
     "order_with_respect_to": ["auth", "core", "core.User", "core.Products"],
 
     # Пользовательские ссылки для добавления в группы приложений, вводимые по имени приложения
-    "custom_links": {
-        "Products": [{
-            "name": "Make dssdfsdfdsfdfdddddddddddddddddddddddddddddddddddddddd Messages", 
-            "url": "make_messages", 
-            "icon": "fas fa-comments",
-            "permissions": ["books.view_book"]
-        }]
-    },
+    # "custom_links": {
+    #     "Products": [{
+    #         "name": "Make dssdfsdfdsfdfdddddddddddddddddddddddddddddddddddddddd Messages", 
+    #         "url": "make_messages", 
+    #         "icon": "fas fa-comments",
+    #         "permissions": ["books.view_book"]
+    #     }]
+    # },
 
     # Пользовательские значки для приложений/моделей бокового меню См. https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
     # полный список бесплатных классов значков 5.13.0
@@ -337,7 +337,24 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
+        "core.RateTypes": "fas fa-hashtag",
+        "core.Products": "fas fa-shopping-bag",
+        "core.User": "fas fa-user",
+        "core.Products": "fas fa-shopping-bag",
+        "core.UsersStatus": "fas fa-id-card",
+        "core.Pages": "fas fa-code",
+        "core.Posts": "fas fa-tag",
+        "core.Discounts": "fas fa-percent",
+        "core.Taxes": "fas fa-university",
+        "core.Categories": "fas fa-indent",
+        "core.ProductsImages": "fa fa-image",
+        "core.Countries": "fas fa-flag",
+        "core.MakerOfProducts": "fas fa-industry",
+        "core.ProductsDiscounts": "fas fa-percent",
+        "core.Orders": "fas fa-truck",
+        "core.OrdersDetails": "fas fa-list",
     },
+    "custom_css": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css",
     # Значки, которые используются, если они не указаны вручную
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-circle",

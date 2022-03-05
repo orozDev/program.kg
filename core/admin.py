@@ -204,13 +204,13 @@ class ProductsAdmin(admin.ModelAdmin):
     def get_imgs(self, obj):
         temp = ''
         for image in obj.images.all():
-            temp = temp + f'<div style="margin-bottom: 10px"><img src="{image}" style="width: 15rem;"></div>'
+            temp = temp + f'<div style="margin-bottom: 10px"><img src="{image}" style="width: 15rem;"> <a href="#" class="btn btn-danger btn-sm">Удалить</a></div>'
         return mark_safe(temp)
     
     def detailAttr(self, obj):
         temp = ''
         for attr in obj.attributes.all():
-            temp = temp + f'<p>{attr.attribute_title_id}: {attr.value}</p>'
+            temp = temp + f'<p>{attr.attribute_title_id}: {attr.value} <a data-href-template="" class="btn btn-danger btn-sm">Удалить</a></p>'
 
         return mark_safe(temp)
 
