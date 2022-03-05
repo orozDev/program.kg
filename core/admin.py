@@ -7,12 +7,12 @@ from django import forms
 from .models import *
 
 
-admin.site.site_header = 'Администрация и контроль данных'
+admin.site.site_header = 'Администрация'
 
 
 class UserAdminConfig(UserAdmin):
     model = User
-    search_fields = ('username', 'name', 'phone_number', 'email')
+    search_fields = ('id', 'username', 'name', 'phone_number', 'email')
     ordering = ('-created_at',)
     list_display = ('username', 'name', 'phone_number', 'email')
     fieldsets = (
@@ -39,6 +39,7 @@ class PagesAdminForm(forms.ModelForm):
 @admin.register(Pages)
 class PagesAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'user_id', 'published',) 
+    list_display_links = ('id', 'title',)
     list_filter = ['user_id']
     search_fields = ('title', 'user_id',)
     readonly_fields = ('created_at', 'updated_at')
@@ -56,6 +57,7 @@ class PostsAdminForm(forms.ModelForm):
 @admin.register(Posts)
 class PostsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'user_id', 'published',)
+    list_display_links = ('id', 'title',)
     list_filter = ['user_id',]
     readonly_fields = ('created_at', 'updated_at')
     search_fields = ('title', 'user_id',)
@@ -65,6 +67,7 @@ class PostsAdmin(admin.ModelAdmin):
 @admin.register(ProductsImages)
 class ProductsImagesAdmin(admin.ModelAdmin):
     list_display = ['id', 'get_img', 'get_img_url']
+    list_display_links = ('id', 'get_img',)
     readonly_fields = ('get_img_url', 'get_img', 'created_at', 'updated_at')
     fields = ('image', 'get_img', 'get_img_url')
 
@@ -83,6 +86,7 @@ class ProductsImagesAdmin(admin.ModelAdmin):
 @admin.register(Discounts)
 class DiscountsAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'rate','rate_type',)
+    list_display_links = ('id', 'name',)
     list_filter = ['rate_type']
     search_fields = ['name']
     readonly_fields = ('created_at', 'updated_at')
@@ -91,6 +95,7 @@ class DiscountsAdmin(admin.ModelAdmin):
 @admin.register(Taxes)
 class TaxesAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'rate','rate_type',)
+    list_display_links = ('id', 'name',)
     list_filter = ['rate_type']
     search_fields = ['name']
     readonly_fields = ('created_at', 'updated_at')
@@ -108,6 +113,7 @@ class CategoriesAdminForm(forms.ModelForm):
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'parent_id',)
+    list_display_links = ('id', 'name',)
     list_filter = ['parent_id']
     search_fields = ['name']
     readonly_fields = ('created_at', 'updated_at')
@@ -117,6 +123,7 @@ class CategoriesAdmin(admin.ModelAdmin):
 @admin.register(AttributesTitles)
 class AttributesTitlesAdmin(admin.ModelAdmin):
     list_display = ['id', 'title']
+    list_display_links = ('id', 'title',)
     search_fields = ['title']
     readonly_fields = ('created_at', 'updated_at')
 
@@ -132,6 +139,7 @@ class AttributesAdminForm(forms.ModelForm):
 @admin.register(Attributes)
 class AttributesAdmin(admin.ModelAdmin):
     list_display = ('id', 'attribute_title_id', 'value')
+    list_display_links = ('id', 'attribute_title_id',)
     list_filter = ['attribute_title_id']
     search_fields = ['value']
     readonly_fields = ('created_at', 'updated_at')
@@ -160,6 +168,7 @@ class ProductsAdmin(admin.ModelAdmin):
         'sale_price',
         'get_img'
      )
+    list_display_links = ('id', 'name')
     list_filter = ['category_id','markup_type',]
     search_fields = ['name',]
 
@@ -224,6 +233,7 @@ class ProductsDiscountsAdminForm(forms.ModelForm):
 @admin.register(ProductsDiscounts)
 class ProductsDiscountsAdmin(admin.ModelAdmin):
     list_display = ('id', 'product_id', 'discount_id', 'start_date', 'end_date', )
+    list_display_links = ('id', 'product_id',)
     list_filter = ['product_id', 'start_date',]
     search_fields = ('product_id', 'discount_id')
     readonly_fields = ('created_at', 'updated_at')
@@ -234,6 +244,7 @@ class ProductsDiscountsAdmin(admin.ModelAdmin):
 @admin.register(DeliveriesType)
 class DeliveriesTypeAdmin(admin.ModelAdmin):
     list_display = ['id', 'title']
+    list_display_links = ('id', 'title',)
     search_fields = ['title']
     readonly_fields = ('created_at', 'updated_at')
 
@@ -241,6 +252,7 @@ class DeliveriesTypeAdmin(admin.ModelAdmin):
 @admin.register(DeliveriesStatus)
 class DeliveriesStatusAdmin(admin.ModelAdmin):
     list_display = ['id', 'title']
+    list_display_links = ('id', 'title',)
     search_fields = ['title']
     readonly_fields = ('created_at', 'updated_at')
 
@@ -258,6 +270,7 @@ class OrdersAdmin(admin.ModelAdmin):
         'total_price',
         'total_price_discount',
     )
+    list_display_links = ('id', 'full_name',)
     list_filter = ['delivery_type', 'status',]
     search_fields = (
         'full_name',
@@ -280,6 +293,7 @@ class OrdersDetailsAdmin(admin.ModelAdmin):
         'total_price',
         'total_price_discount',
     )
+    list_display_links = ('id', 'order_id',)
     list_filter = ['product_id']
     search_fields = []
 
@@ -287,12 +301,14 @@ class OrdersDetailsAdmin(admin.ModelAdmin):
 @admin.register(Countries)
 class CountriesAdmin(admin.ModelAdmin):
     list_display = ['id', 'title']
+    list_display_links = ('id', 'title',)
     search_fields = ['title']    
 
 
 @admin.register(RateTypes)
 class RateTypesAdmin(admin.ModelAdmin):
     list_display = ('id' ,'title', 'slug')
+    list_display_links = ('id', 'title',)
     list_filter = []
     search_fields = ['title', 'slug']
     fields = ('title', 'slug', 'created_at', 'updated_at',)
@@ -311,6 +327,7 @@ class MakerOfProductsAdminForm(forms.ModelForm):
 @admin.register(MakerOfProducts)
 class MakerOfProductsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'created_at', 'updated_at', 'country','get_img')
+    list_display_links = ('id', 'title',)
     search_fields = ['title',]
 
     fields = ('title', 'description', 'country','logo','get_img', 'created_at', 'updated_at')
@@ -328,5 +345,6 @@ class MakerOfProductsAdmin(admin.ModelAdmin):
 class UserStatusAdmin(admin.ModelAdmin):
 
     list_display = ('id', 'title', 'slug',)
+    list_display_links = ('id', 'title',)
 
 # Register your models here.

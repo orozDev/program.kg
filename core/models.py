@@ -91,7 +91,7 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampMixin):
     REQUIRED_FIELDS = ['email', 'name', 'phone_number', 'status']
 
     def __str__(self):
-        return f'{self.username} - {self.name}'
+        return f'{self.username}'
 
 
 

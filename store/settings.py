@@ -34,6 +34,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jazzmin',
+    #'djangocms_admin_style',
+    #'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #'django.template.context_processors.request',
             ],
         },
     },
@@ -235,3 +238,170 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+
+
+JAZZMIN_SETTINGS = {
+    #заголовок окна (по умолчанию будет current_admin_site.site_title, если он отсутствует или отсутствует)
+    "site_title": "Program.kg Admin",
+
+    # Заголовок на экране входа (максимум 19 символов) (по умолчанию — current_admin_site.site_header, если он отсутствует или отсутствует)
+    "site_header": "Program.kg",
+
+    #Название бренда (максимум 19 символов) (по умолчанию — current_admin_site.site_header, если оно отсутствует или отсутствует)
+    "site_brand": "Program.kg",
+
+    # Логотип для вашего сайта должен присутствовать в статических файлах, используется для бренда в левом верхнем углу.
+    "site_logo": os.path.join(BASE_DIR, 'static', 'images', 'logo.png'),
+
+    # Классы CSS, которые применяются к логотипу выше
+    "site_logo_classes": "img-circle",
+
+    # Относительный путь к значку для вашего сайта, по умолчанию будет site_logo, если он отсутствует (в идеале 32x32 px)
+    "site_icon": None,
+
+    # Приветственный текст на экране входа
+    "welcome_sign": "Добро пожаловать в администрацию сайта",
+
+    # Авторское право на нижний колонтитул
+    "copyright": "OROZ",
+
+    # Администратор модели для поиска из панели поиска, панель поиска опускается, если исключена
+    "search_model": "auth.User",
+
+    # Имя поля в модели пользователя, которое содержит аватар ImageField/URLField/Charfield или вызываемый объект, который получает пользователя
+    "user_avatar": None,
+
+    ############
+    # Top Menu #
+    ############
+
+    # Ссылки для размещения в верхнем меню
+    "topmenu_links": [
+
+        # URL-адрес, который становится обратным (можно добавить разрешения)
+        {"name": "Главная",  "url": "admin:index", "permissions": ["auth.view_user"]},
+
+        # внешний URL, который открывается в новом окне (можно добавить разрешения)
+        {"name": "Jazzmin", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+
+        # администратор модели для связи с (разрешения проверены для модели)
+        {"model": "auth.User"},
+
+        #Приложение с выпадающим меню для всех страниц своих моделей (разрешения проверены для моделей)
+        #{"app": "books"},
+    ],
+
+    #############
+    # Меню пользователя#
+    #############
+
+    # Дополнительные ссылки для включения в меню пользователя в правом верхнем углу (URL-адрес типа "приложение" не разрешен)
+    "usermenu_links": [
+        {"name": "Jazzmin", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"model": "auth.user"}
+    ],
+
+    #############
+    # Боковое меню #
+    #############
+
+    # Отображать ли боковое меню
+    "show_sidebar": True,
+
+    # Нужно ли автоматически расширять меню
+    "navigation_expanded": True,
+
+    # Скрыть эти приложения при создании бокового меню, например (авторизация)
+    "hide_apps": [],
+
+    # Скрыть эти модели при создании бокового меню (например, auth.user)
+    "hide_models": [],
+
+    # Список приложений (и/или моделей) для базового упорядочения бокового меню (не обязательно содержать все приложения/модели)
+    "order_with_respect_to": ["auth", "core", "core.User", "core.Products"],
+
+    # Пользовательские ссылки для добавления в группы приложений, вводимые по имени приложения
+    "custom_links": {
+        "Products": [{
+            "name": "Make dssdfsdfdsfdfdddddddddddddddddddddddddddddddddddddddd Messages", 
+            "url": "make_messages", 
+            "icon": "fas fa-comments",
+            "permissions": ["books.view_book"]
+        }]
+    },
+
+    # Пользовательские значки для приложений/моделей бокового меню См. https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2
+    # полный список бесплатных классов значков 5.13.0
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+    # Значки, которые используются, если они не указаны вручную
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+
+    #################
+    # Связанный модальный #
+    #################
+    # Используйте модальные окна вместо всплывающих окон
+    "related_modal_active": False,
+
+    #############
+    # Настройки пользовательского интерфейса #
+    #############
+    # Относительные пути к пользовательским скриптам CSS/JS (должны присутствовать в статических файлах)
+    "custom_css": None,
+    "custom_js": None,
+    # Показывать ли настройщик пользовательского интерфейса на боковой панели
+    "show_ui_builder": False,
+
+    ###############
+    # Сменить вид #
+    ###############
+    # Визуализировать представление изменений в виде отдельной формы или на вкладках, текущие параметры
+    # - single
+    # - horizontal_tabs (default)
+    # - vertical_tabs
+    # - collapsible
+    # - carousel
+    "changeform_format": "horizontal_tabs",
+    # переопределить формы изменений для каждой модели на основе администратора
+    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-primary",
+    "navbar": "navbar-white navbar-light",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": True,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": True,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
+
+JAZZMIN_SETTINGS["show_ui_builder"] = True
